@@ -1,0 +1,87 @@
+@font-face {
+    font-family: 'manrope-light';
+    src: url('/static/fonts/manrope-light.woff2') format('woff2');
+    font-style: normal;
+    font-weight: 300
+}
+
+@font-face {
+    font-family: 'manrope-bold';
+    src: url('/static/fonts/manrope-bold.woff2') format('woff2');
+    font-style: normal;
+    font-weight: 900
+}
+
+@font-face {
+    font-family: 'manrope-medium';
+    src: url('/static/fonts/manrope-medium.woff2') format('woff2');
+    font-style: normal;
+    font-weight: 500
+}
+
+html {
+    font-family: "manrope-medium", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+h3, .charge_count {
+    font-family: "manrope-bold" !important;
+}
+
+p, .donated {
+    font-family: "manrope-medium" !important;
+}
+
+.outer {
+    position: relative;
+    text-align: center;
+    color: white;
+}
+
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-67%, 85%);
+}
+
+.charge_count {
+    font-size: 7vw;
+}
+
+.donated {
+    font-size: 1.5vw;
+}
+
+img {
+    position: absolute;
+    width: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 50%);
+}
+
+@media (max-width: 767px) {
+    img {
+        width: 100%;
+        -moz-transform: rotate(-90deg) translate(-50%, -120%);
+        -webkit-transform: rotate(-90deg) translate(-50%, -120%);
+        -ms-transform: rotate(-90deg) translate(-50%, -120%);
+        transform: rotate(-90deg) translate(-50%, -120%);
+    }
+
+    .centered {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-65%, 240%);
+    }
+
+    .charge_count {
+        font-size: 12vw;
+    }
+
+    .donated {
+        font-size: 3vw;
+        margin-right: 1vw;
+    }
+}

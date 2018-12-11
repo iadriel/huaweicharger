@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Huawei Charger</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type="text/css"/>
+    <link rel="stylesheet" href="{% static 'css/bootstrap-grid.min.css' %}" type="text/css"/>
+    <link rel="stylesheet" href="{% static 'css/home.css' %}" type="text/css"/>
+    <script src="{% static "jquery3/jquery.min.js" %}"></script>
+    <script src="{% static "js/jquery.animateNumber.min.js" %}"></script>
+    <script src="{% static "js/bootstrap.min.js" %}"></script>
+    <script src="{% static "js/wave.js" %}"></script>
+    <script src="{% static "js/app.js" %}"></script>
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    <script>
+        let wave = new Wave();
+        let selected_amount = 0;
+        let blocked = false;
+        $(window).on("load", function () {
+            wave.Initialize('world', (1 - ({{ current_charge }}/100)));
+
+            $(".donate_charge").click(function () {
+                if (blocked === false) {
+                    $(".donate_charge").each(function () {
+                        $(this).addClass("normal");
+                        $(this).removeClass("inverted");
+                    });
+
+                    $(event.target).addClass("inverted");
+                    $(event.target).removeClass("normal");
+
+                    selected_amount = event.target.id;
+                }
+            });
+            $("#confirm").click(function () {
+                if (selected_amount !== 0 && blocked === false) {
+                    blocked = true;
+                    $(event.target).addClass("inverted");
+                    $(event.target).removeClass("normal");
+                    $(event.target).text("Sending");
+                    charge(selected_amount);
+                }
+            });
+        });
+
+    </script>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row align-items-center center justify-content-md-center">
+        <div class="col-12 col-md-4 my-auto">
+            <div class="component-tile-caption">
+                <h3 class="animate-1 h2 h6-xs pb-4 pt-6">Power to Trust</h3>
+            </div>
+            <p class="animate-3 h3 mb-4">The 40 W HUAWEI SuperCharge with TÜV
+                Safe Fast-Charge System Certification makes HUAWEI Mate 20 Pro your powerful mate to trust. In 30
+                minutes, you can refuel the battery up to 70%.</p>
+            <div class="row no-gutters">
+                <div class="col-6 col-lg-3 p-1">
+                    <button id="5" class="donate_charge">5%</button>
+                </div>
+                <div class="col-6 col-lg-3 p-1">
+                    <button id="10" class="donate_charge">10%</button>
+                </div>
+                <div class="col-6 col-lg-3 p-1">
+                    <button id="25" class="donate_charge">25%</button>
+                </div>
+                <div class="col-6 col-lg-3 p-1">
+                    <button id="50" class="donate_charge">50%</button>
+                </div>
+            </div>
+            <div class="row no-gutters align-items-center center justify-content-md-center">
+                <div class="col">
+                    <button id="confirm" class="m-1">Confirm</button>
+                </div>
+
+            </div>
+            <div class="row align-items-center center justify-content-md-center">
+              <div class="col-6 col-sm-4">
+                <a class="share-buttons" href="https://twitter.com/intent/tweet?hashtags=helloworld%2Cdemo%2Cexample&original_referer=http%3A%2F%2F127.0.0.1%3A8000%2F&ref_src=twsrc%5Etfw&related=HuaweiMobile&text=Lorem%20ipsum%20dolor%20sit%20amet&tw_p=tweetbutton&url=https%3A%2F%2Fconsumer.huawei.com%2Fen%2Fphones%2Fmate20-pro%2F&via=HuaweiMobileUK">
+                    <img src="{% static "images/Huawei-Share-Twitter.svg" %}" width="100%">
+                </a>
+              </div>
+              <div class="col-6 col-sm-4">
+                <a class="share-buttons" href="">
+                  <img src="{% static "images/Huawei-Share-FB.svg" %}" width="100%">
+                </a>
+              </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-4 my-auto text-center">
+            <canvas id="world"><p class="noCanvas">You need a <a
+                    href="http://www.google.com/chrome">modern
+                browser</a> to view this.</p></canvas>
+            <img src="{% static "images/phone.png" %}" id="device"/>
+            <div class="charge"><span class="font-weight-light"
+                                      id="current_charge">{{ current_charge }}</span> <span class="h6">%</span>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
